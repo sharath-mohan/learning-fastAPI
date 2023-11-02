@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -36,10 +36,10 @@ async def read_items(skip: int = 0, limit: int = 0, search: str | None = None):
     return {"items": fake_items[skip:skip + limit], "search": search}
 
 
-''' request body '''
+''' request body & status codes'''
 
 
-@app.post("/items")
+@app.post("/items", status_code=status.HTTP_201_CREATED)
 async def write_items(item: Item):
     fake_items.append(item.model_dump())
     return {"msg": "item added successfully", **item.model_dump()}
