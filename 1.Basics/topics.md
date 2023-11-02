@@ -2,7 +2,7 @@
 - [X] Path Parameters
 - [X] Query Parameters
 - [X] Request Body
-- [ ] Query Parameters and String Validations
+- [X] Query Parameters and String Validations
 - [ ] Path Parameters and Numeric Validations
 - [ ] Body - Multiple Parameters
 - [ ] Body - Fields
