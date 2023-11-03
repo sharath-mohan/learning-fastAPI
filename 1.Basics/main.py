@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status, Query
+from fastapi import FastAPI, status, Query, Path
 from pydantic import BaseModel
 from typing import Annotated
 
@@ -65,3 +65,11 @@ async def read_users_me(q: Annotated[str, Query( title="search query", max_lengt
     if qlist and len(qlist):
         users.update({"qlist": qlist})
     return users
+
+
+''' Path Parameters and Numeric validations '''
+
+
+@app.get("/users/{user_id}")
+async def read_user_details(user_id: Annotated[int, Path(title="user id", ge=1)]):
+    return {"user_id": user_id}
