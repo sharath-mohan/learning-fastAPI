@@ -3,14 +3,14 @@
 - [X] Query Parameters
 - [X] Request Body
 - [X] Query Parameters and String Validations
-- [ ] Path Parameters and Numeric Validations
+- [X] Path Parameters and Numeric Validations
 - [ ] Body - Multiple Parameters
 - [ ] Body - Fields
 - [ ] Body - Nested Models
 - [ ] Declare Request Example Data
 - [ ] Extra Data Types
 - [ ] Cookie Parameters
-- [ ] Header Parameters
+- [X] Header Parameters
 - [ ] Response Model - Return Type
 - [ ] Extra Models
 - [X] Response Status Code

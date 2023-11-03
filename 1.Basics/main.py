@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status, Query, Path
+from fastapi import FastAPI, status, Query, Path, Cookie, Header
 from pydantic import BaseModel
 from typing import Annotated
 
@@ -58,7 +58,8 @@ async def read_users(q: Annotated[str | None, Query(max_length=10)] = None):
 
 
 @app.get("/users/me")
-async def read_users_me(q: Annotated[str, Query( title="search query", max_length=10)] = "Ricky", qlist: Annotated[list[str] | None, Query()] = None):
+async def read_users_me(q: Annotated[str, Query(title="search query", max_length=10)] = "Ricky",
+                        qlist: Annotated[list[str] | None, Query()] = None):
     users = {"users": [{"name": "sharath"}, {"name": "mohan"}]}
     if q:
         users.update({"q": q})
@@ -73,3 +74,20 @@ async def read_users_me(q: Annotated[str, Query( title="search query", max_lengt
 @app.get("/users/{user_id}")
 async def read_user_details(user_id: Annotated[int, Path(title="user id", ge=1)]):
     return {"user_id": user_id}
+
+
+''' Cookies '''
+
+
+@app.get("/cookies")
+async def set_cookie(add_id: Annotated[str | None, Cookie()] = None):
+    return {"add_id": add_id}
+
+
+''' Headers '''
+
+
+@app.get("/headers")
+async def read_headers(authorization: Annotated[str | None, Header()] = None,
+                       strange_header: Annotated[str | None, Header()] = None):
+    return {"authorization": authorization, "strange_header": strange_header}
