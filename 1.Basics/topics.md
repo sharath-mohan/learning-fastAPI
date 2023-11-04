@@ -29,6 +29,6 @@
 - [ ] Bigger Applications - Multiple Files
 - [ ] Background Tasks
 - [ ] Metadata and Docs URLs
-- [ ] Static Files
+- [X] Static Files
 - [ ] Testing
 - [ ] Debugging

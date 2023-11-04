@@ -1,6 +1,7 @@
 from fastapi import FastAPI, status, Query, Path, Cookie, Header
 from pydantic import BaseModel
 from typing import Annotated
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -91,3 +92,7 @@ async def set_cookie(add_id: Annotated[str | None, Cookie()] = None):
 async def read_headers(authorization: Annotated[str | None, Header()] = None,
                        strange_header: Annotated[str | None, Header()] = None):
     return {"authorization": authorization, "strange_header": strange_header}
+
+
+''' static files '''
+app.mount("/static", StaticFiles(directory="static", html=True), name="static")
