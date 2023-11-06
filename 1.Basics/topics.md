@@ -15,7 +15,7 @@
 - [ ] Extra Models
 - [X] Response Status Code
 - [ ] Form Data
-- [ ] Request Files
+- [X] Request Files
 - [ ] Request Forms and Files
 - [ ] Handling Errors
 - [ ] Path Operation Configuration
