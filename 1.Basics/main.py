@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status, Query, Path, Cookie, Header
+from fastapi import FastAPI, status, Query, Path, Cookie, Header, File, UploadFile, HTTPException
 from pydantic import BaseModel
 from typing import Annotated
 from fastapi.staticfiles import StaticFiles
@@ -96,3 +96,21 @@ async def read_headers(authorization: Annotated[str | None, Header()] = None,
 
 ''' static files '''
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+
+
+'''files'''
+
+
+@app.post("/file")
+async def create_file(file: Annotated[bytes, File()]):
+    return {"file_size": len(file)}
+
+
+''' upload files  '''
+
+
+@app.post("/upload_file")
+async def upload_file(file:Annotated[UploadFile, File()]):
+    if file.content_type != 'image/png':
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="invalid file format")
+    return {"file_size": file.size}
