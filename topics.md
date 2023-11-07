@@ -26,7 +26,7 @@
 - [ ] Middleware
 - [ ] CORS (Cross-Origin Resource Sharing)
 - [ ] SQL (Relational) Databases
-- [ ] Bigger Applications - Multiple Files
+- [X] Bigger Applications - Multiple Files
 - [ ] Background Tasks
 - [ ] Metadata and Docs URLs
 - [X] Static Files
