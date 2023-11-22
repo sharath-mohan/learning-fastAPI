@@ -1,4 +1,6 @@
-from fastapi import FastAPI, status, Query, Path, Cookie, Header, File, UploadFile, HTTPException
+import time
+
+from fastapi import FastAPI, status, Query, Path, Cookie, Header, File, UploadFile, HTTPException, Request
 from pydantic import BaseModel
 from typing import Annotated
 from fastapi.staticfiles import StaticFiles
@@ -15,6 +17,18 @@ fake_items = [
 class Item(BaseModel):
     name: str
     item_id: int
+
+
+'''Middlewares'''
+
+
+@app.middleware("http")
+async def compute_time_middleware(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers['X-Process-Time'] = str(process_time)
+    return response
 
 
 @app.get("/")
@@ -97,7 +111,6 @@ async def read_headers(authorization: Annotated[str | None, Header()] = None,
 ''' static files '''
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
-
 '''files'''
 
 
@@ -110,7 +123,7 @@ async def create_file(file: Annotated[bytes, File()]):
 
 
 @app.post("/upload_file")
-async def upload_file(file:Annotated[UploadFile, File()]):
+async def upload_file(file: Annotated[UploadFile, File()]):
     if file.content_type != 'image/png':
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="invalid file format")
     return {"file_size": file.size}
