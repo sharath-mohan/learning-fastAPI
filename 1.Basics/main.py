@@ -4,7 +4,8 @@ from fastapi import FastAPI, status, Query, Path, Cookie, Header, File, UploadFi
 from pydantic import BaseModel
 from typing import Annotated
 from fastapi.staticfiles import StaticFiles
-
+from fastapi.middleware.cors import CORSMiddleware
+from config.origins import origins
 app = FastAPI()
 
 fake_items = [
@@ -19,6 +20,14 @@ class Item(BaseModel):
     item_id: int
 
 
+'''CORS'''
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 '''Middlewares'''
 
 
