@@ -23,8 +23,8 @@
 - [ ] Body - Updates
 - [ ] Dependencies
 - [ ] Security
-- [ ] Middleware
-- [ ] CORS (Cross-Origin Resource Sharing)
+- [X] Middleware
+- [X] CORS (Cross-Origin Resource Sharing)
 - [ ] SQL (Relational) Databases
 - [X] Bigger Applications - Multiple Files
 - [ ] Background Tasks
